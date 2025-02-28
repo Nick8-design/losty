@@ -206,7 +206,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
     String searchQuery = _descriptionController.text.trim().toLowerCase();
 
-    // Use AI-detected name if available
     if (_selectedImage != null && _detectedName != null && _detectedName != "Processing image...") {
       searchQuery = _detectedName!.toLowerCase();
       _descriptionController.text = _detectedName!; // Auto-fill input field
@@ -223,13 +222,16 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     // 🔍 Fetch all lost items
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('lost_items').get();
 
-    // 🔍 Manually filter results based on partial match
+    // 🔍 Manually filter results using substring matching
     List<DocumentSnapshot> matchingItems = querySnapshot.docs.where((doc) {
       var data = doc.data() as Map<String, dynamic>? ?? {};
       List<String> keywords = List<String>.from(data['keywords'] ?? []);
 
+    print(keywords);
       return keywords.any((keyword) => keyword.contains(searchQuery));
     }).toList();
+
+    print("✅ Found ${matchingItems.length} matching items");
 
     setState(() {
       _isLoading = false;
@@ -238,14 +240,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     // if (matchingItems.isEmpty) {
     //   _showMessage("No matching items found.");
     // } else {
-       Navigator.push(
+      Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => MatchingDescriptionScreen(foundItems: matchingItems),
         ),
       );
-
+   // }
   }
+
 
 
 
