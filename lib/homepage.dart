@@ -1,5 +1,6 @@
 import 'package:finder/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'new2/chart_screen.dart';
 // Replace with actual admin login screen file
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/lost_and_found.jpg"), // Add this image in your assets
+                image: AssetImage("assets/see/.png"), // Add this image in your assets
                 fit: BoxFit.cover,
               ),
             ),
@@ -33,7 +34,7 @@ class HomePage extends StatelessWidget {
                 // App Logo (Optional)
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage: AssetImage("assets/logo.png"), // Add a logo in assets
+                  backgroundImage: AssetImage("assets/see/oneeyepic1.png"), // Add a logo in assets
                 ),
                 SizedBox(height: 20),
 
@@ -69,10 +70,7 @@ class HomePage extends StatelessWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChatScreen()), // Replace with actual screen
-                    );
+                    context.go("/talk_to_us");
                   },
                 ),
                 SizedBox(height: 15),
@@ -82,15 +80,12 @@ class HomePage extends StatelessWidget {
                   icon: Icon(Icons.lock, color: Colors.white),
                   label: Text("Admin Login"),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent,
+                    backgroundColor: Colors.orange,
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage(isAdmin: true,)), // Replace with actual screen
-                    );
+                   context.go("/login");
                   },
                 ),
               ],

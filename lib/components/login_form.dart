@@ -12,10 +12,7 @@ import '../pages/register_page.dart';
 import '../pages/reset_pass.dart';
 
 class LoginForm extends ConsumerStatefulWidget {
-  LoginForm( { required this.roles,required this.isAdmin,super.key});
-bool isAdmin;
-
-final String roles;
+  LoginForm( { super.key});
 
   @override
   ConsumerState<LoginForm> createState() => _StateLoginForm();
@@ -309,6 +306,14 @@ Form(
 
         ElevatedButton(
           child: const Text('Login'),
+          style: ElevatedButton.styleFrom(
+
+              shape:  RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(2),
+              ),
+              elevation: 20,
+              padding: EdgeInsets.all(5)
+          ),
           onPressed: () async {
             if (_formKeylogin.currentState!.validate()) {
               final userDao = ref.watch(userDaoProvider);
@@ -320,17 +325,17 @@ Form(
               if (errorMessage == null) {
                 print("✅ Login successful. Fetching updated user role...");
 
-                await Future.delayed(Duration(milliseconds: 500)); // Ensure Firebase updates
-                ref.invalidate(userRoleProvider); // **Forces Firebase to re-fetch role**
-
-                final userRoleAsync = await ref.read(userRoleProvider.future); // Read updated value
-                print("🔥 Updated Role After Login: $userRoleAsync");
-
-                if (userRoleAsync == "admin") {
-                  context.go('/admindashboard'); // Redirect Admin
-                } else {
+              //   await Future.delayed(Duration(milliseconds: 500)); // Ensure Firebase updates
+              //   ref.invalidate(userRoleProvider); // **Forces Firebase to re-fetch role**
+              //
+              //   final userRoleAsync = await ref.read(userRoleProvider.future); // Read updated value
+              //   print("🔥 Updated Role After Login: $userRoleAsync");
+              //
+              // //  if (userRoleAsync == "admin") {
+          //    //  //   context.go('/admindashboard'); // Redirect Admin
+              // //  } else {
                   context.go('/dashboard'); // Redirect Normal User
-                }
+              //  }
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(errorMessage), duration: Duration(seconds: 2)),
@@ -364,11 +369,7 @@ Text("Or",style: TextStyle(
           
           onPressed: ()  {
 
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>    RegisterPage()),
-            );
-
+          context.go("/register");
 
 
            ScaffoldMessenger.of(context).showSnackBar(

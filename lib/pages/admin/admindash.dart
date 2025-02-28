@@ -248,36 +248,8 @@ print(imageUrl);
       });
     }
   }
-  // Future<String?> _uploadImage(File file) async {
-  //   try {
-  //     String fileName = file.path.split("/").last;
-  //
-  //     FormData data;
-  //     if (kIsWeb) {
-  //       Uint8List fileBytes = await file.readAsBytes();
-  //       data = FormData.fromMap({
-  //         "file": MultipartFile.fromBytes(fileBytes, filename: fileName),
-  //       });
-  //     } else {
-  //       data = FormData.fromMap({
-  //         "file": await MultipartFile.fromFile(file.path, filename: fileName),
-  //       });
-  //     }
-  //
-  //     var response = await dio.post(uploadUrl, data: data);
-  //
-  //     if (response.statusCode == 200) {
-  //       print("✅ Image uploaded successfully: ${saveUrl}/files/$fileName");
-  //       return "${uploadUrl}/files/$fileName"; // Ensure correct URL format
-  //     } else {
-  //       print("⚠️ Image upload failed: ${response.statusCode}");
-  //       return null;
-  //     }
-  //   } catch (e) {
-  //     print("❌ Error uploading image: $e");
-  //     return null;
-  //   }
-  // }
+
+
 
 
   Future<String?> _uploadImage(File file) async {

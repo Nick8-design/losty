@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 
   import '../components/login_form.dart';
@@ -62,7 +63,7 @@ class _StateLoginPage extends   State<LoginPage> {
                       child:
                       ListView(
           children: [
-              LoginForm(roles: roles,isAdmin:widget.isAdmin)
+              LoginForm()
           ]
 
 
@@ -96,7 +97,7 @@ class _StateLoginPage extends   State<LoginPage> {
                         child:
                         ListView(
                             children: [
-                              LoginForm(roles: roles,isAdmin:widget.isAdmin)
+                              LoginForm()
                             ]
 
 
@@ -136,7 +137,7 @@ class _StateLoginPage extends   State<LoginPage> {
         SizedBox(width: 4),
 
 
-        tuitorbtn()
+      //  tuitorbtn()
       ],
     );
   }
@@ -242,7 +243,7 @@ class _StateLoginPage extends   State<LoginPage> {
 
             )
         ),
-        child: Text("User"),
+        child: Text("HomePage"),
 
       ),
 
@@ -250,8 +251,9 @@ class _StateLoginPage extends   State<LoginPage> {
       //),
       onTap: () {
         setState(() {
-          is_active = !is_active;
-          roles='User';
+          context.go("/");
+          // is_active = !is_active;
+          // roles='User';
         });
       },
     );
@@ -273,7 +275,7 @@ class _StateLoginPage extends   State<LoginPage> {
         ),
         Positioned(
             right: 0,
-            child:     LoginForm(roles: roles,isAdmin:widget.isAdmin)
+            child:     LoginForm()
 
         )
 

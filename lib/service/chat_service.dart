@@ -42,7 +42,7 @@ class ChatService {
     }
     else if (conversationStage == 3) {
       itemDescription = userInput;
-      return "Can you describe the $itemDescription in more detail  And where did you lose it? name of the place";
+      return "Can you describe the $itemDescription in more detail  And where did you lose it? name of the place you hard it last?";
     }
     else if (conversationStage == 4) {
       location = userInput;
@@ -67,8 +67,8 @@ class ChatService {
   Future<String> searchDatabase(String item, String location) async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('lost_items')
-        .where('item', isEqualTo: item)
-        .where('location', isEqualTo: location)
+        .where('name', isEqualTo: item)
+        .where('place_found', isEqualTo: location)
         .get();
 
     if (snapshot.docs.isNotEmpty) {
@@ -84,10 +84,13 @@ class ChatService {
   Future<void> storeAlertRequest(String name, String item, String location) async {
     await FirebaseFirestore.instance.collection('alerts').add({
       'user': name,
-      'item': item,
-      'location': location,
+      'name': item,
+      'place': location,
+      "descriptions":item,
       'notified': false,
-      'timestamp': DateTime.now(),
+      'date': DateTime.now(),
+      "color":""
+
     });
   }
 

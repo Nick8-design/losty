@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'firebase_options.dart';
 import 'homepage.dart';
+import 'new2/additem.dart';
 import 'new2/chart_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'pages/admin/admindash.dart';
@@ -15,6 +16,7 @@ import 'pages/register_page.dart';
 import 'pages/aboutus.dart';
 import 'data/providers.dart';
 import 'constants.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +43,13 @@ class _MyAppState extends ConsumerState<MyApp> {
     initialLocation: '/',
     routes: [
       GoRoute(path: '/', builder: (context, state) => HomePage()),
+
+      GoRoute(path: '/add_item', builder: (context, state) => AddItemPage(
+        changeTheme: changeThemeMode,
+        changeColor: changeColor,
+        colorSelected: colorSelected,
+      )),
+      GoRoute(path: '/talk_to_us', builder: (context, state) => ChatScreen()),
       GoRoute(path: '/login', builder: (context, state) => LoginPage(isAdmin: isAdmin())),
       GoRoute(path: '/register', builder: (context, state) => RegisterPage()),
       GoRoute(path: '/admindashboard', builder: (context, state) => AdminDashboardScreen()),

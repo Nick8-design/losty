@@ -8,8 +8,8 @@ import 'package:go_router/go_router.dart';
 import '../pages/login_page.dart';
 
 class RegForm extends ConsumerStatefulWidget {
-  RegForm({ super.key,this.whichbtn});
-final whichbtn;
+  RegForm({ super.key});
+
 
   @override
   ConsumerState<RegForm> createState() => _StateRegForm();
@@ -85,7 +85,7 @@ class _StateRegForm extends   ConsumerState<RegForm> {
                 DropdownButton<String>
                   (
                   value: selectedUser,
-                    items: <String>['Admin','User']
+                    items: <String>['Admin']
                     .map<DropdownMenuItem<String>>((String user){
                       return DropdownMenuItem<String>(
                         value: user,
@@ -198,15 +198,15 @@ class _StateRegForm extends   ConsumerState<RegForm> {
 
   }
 
-  void checkUserRole() async {
-    final userDao = ref.watch(userDaoProvider);
-    String? role = await userDao.getUserRole();
-    if (role == 'admin') {
-      Navigator.pushNamed(context, '/admindashboard');
-    } else if (role == 'user') {
-      Navigator.pushNamed(context, '/dashboard');
-    }
-  }
+  // void checkUserRole() async {
+  //   final userDao = ref.watch(userDaoProvider);
+  //   String? role = await userDao.getUserRole();
+  //   if (role == 'admin') {
+  //     Navigator.pushNamed(context, '/admindashboard');
+  //   } else if (role == 'user') {
+  //     Navigator.pushNamed(context, '/dashboard');
+  //   }
+  // }
 
 
   Widget logreg(){
@@ -234,7 +234,7 @@ class _StateRegForm extends   ConsumerState<RegForm> {
                   hashPassword(_passwordController.text)
                       : '',
 
-                  ref.watch(selectedNameProvider),
+                  "Admin",
 
                 );
 
@@ -248,15 +248,15 @@ class _StateRegForm extends   ConsumerState<RegForm> {
 
 
                   if (errorMessage == null) {
-                    await Future.delayed(Duration(milliseconds: 2)); // Small delay to ensure auth state update
+                 //   await Future.delayed(Duration(milliseconds: 2)); // Small delay to ensure auth state update
 
                    // context.go('/dashboard');
                    //
-                    if (ref.watch(selectedNameProvider) == 'admin') {
-                      context.go('/admindashboard');
-                    } else if (ref.watch(selectedNameProvider) == 'user') {
+                 //   if (ref.watch(selectedNameProvider) == 'admin') {
+                   //  context.go('/admindashboard');
+                    // } else if (ref.watch(selectedNameProvider) == 'user') {
                       context.go('/dashboard');
-                    }
+                    // }
 
                   } else {
                     if (!mounted) return;

@@ -117,11 +117,7 @@ bool phn=false;
 
                   child: IconButton(
                       onPressed: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder:(context)=> LoginPage(isAdmin: false,)
-                            )
-
-                        );
+                        context.go("/login");
                       },
                       icon: Icon(Icons.arrow_back_sharp)
                   ),
@@ -183,11 +179,7 @@ bool phn=false;
 
           child: IconButton(
           onPressed: (){
-          Navigator.push(context,
-          MaterialPageRoute(builder:(context)=> LoginPage(isAdmin: false,)
-          )
-
-          );
+            context.go("/login");
           },
           icon: Icon(Icons.arrow_back_sharp)
           ),
@@ -212,7 +204,7 @@ bool phn=false;
         SizedBox(width: 4),
 
 
-        tuitorbtn()
+      //  tuitorbtn()
       ],
     );
   }
@@ -356,11 +348,7 @@ bool phn=false;
 
           child: IconButton(
               onPressed: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder:(context)=> LoginPage(isAdmin: false,)
-                    )
-
-                );
+                context.go("/login");
               },
               icon: Icon(Icons.arrow_back_sharp)
           ),
