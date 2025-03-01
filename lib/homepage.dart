@@ -59,6 +59,15 @@ class HomePage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 30),
+                Text(
+                  "Connecting lost items with their owner using Ai",
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 18,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 30),
 
                 // User Chat Button
                 ElevatedButton.icon(

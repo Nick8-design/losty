@@ -9,6 +9,7 @@ import '../components/theme_button.dart';
 import '../components/wavyappbarclipper.dart';
 import '../constants.dart';
 import '../data/providers.dart';
+import '../mpesa.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({
@@ -266,14 +267,56 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   //   );
   // }
 
+  // void _openItemDetails(BuildContext context, Map<String, dynamic> item, String collection) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => ItemDetailsPage(item: item, status: collection),
+  //     ),
+  //   );
+  // }
+
   void _openItemDetails(BuildContext context, Map<String, dynamic> item, String collection) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ItemDetailsPage(item: item, status: collection),
-      ),
+    showDialog(
+      context: context,
+      builder: (context) {
+        TextEditingController phoneController = TextEditingController();
+
+        return AlertDialog(
+          title: Text(item['name'] ?? 'Unknown Item'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Category: ${item['category'] ?? 'No category'}'),
+              Text('Location: ${item['place_found'] ?? 'N/A'}'),
+              TextField(
+                controller: phoneController,
+                decoration: InputDecoration(labelText: "Enter M-Pesa Phone Number"),
+                keyboardType: TextInputType.phone,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                String phoneNumber = phoneController.text.trim();
+                if (phoneNumber.isNotEmpty) {
+                  await MpesaService.stkPush(phoneNumber, 130, item['id']);
+                  Navigator.pop(context);
+                }
+              },
+              child: Text("Pay Ksh 130"),
+            ),
+
+
+
+
+          ],
+        );
+      },
     );
   }
+
 
   void _showNotification(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(

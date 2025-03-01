@@ -137,7 +137,7 @@ class _StateLoginPage extends   State<LoginPage> {
         SizedBox(width: 4),
 
 
-      //  tuitorbtn()
+        tuitorbtn()
       ],
     );
   }
