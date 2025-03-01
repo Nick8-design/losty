@@ -81,6 +81,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 children: [
                   _buildFirestoreSection('Found Items', 'lost_items', context, crossAxisCount),
                   _buildFirestoreSection('Reported Items', 'alerts', context, crossAxisCount),
+                  _buildFirestoreSection('Found but not browth in yet', 'found_items', context, crossAxisCount),
                   _buildFirestoreSection('Collected Items', 'collected_items', context, crossAxisCount),
                 ],
               ),
@@ -91,11 +92,50 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+//
+// StreamBuilder<QuerySnapshot>(
+//       stream: _firestore.collection('alerts').where('status', isEqualTo: 'unfound').snapshots(),
+//       builder: (context, snapshot) {
+//         int count = snapshot.hasData ? snapshot.data!.docs.length : 0;
+//
+//         return Stack(
+//           alignment: Alignment.topRight,
+//           children: [
+//             FloatingActionButton(
+//               onPressed: () => _showNotification(context),
+//               child: const Icon(Icons.notifications),
+//               tooltip: 'New Report Notification',
+//             ),
+//             if (count > 0)
+//               Positioned(
+//                 right: 0,
+//                 child: Container(
+//                   padding: const EdgeInsets.all(6),
+//                   decoration: const BoxDecoration(
+//                     color: Colors.red,
+//                     shape: BoxShape.circle,
+//                   ),
+//                   child: Text(
+//                     count.toString(),
+//                     style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+//                   ),
+//                 ),
+//               ),
+//           ],
+//         );
+//       },
+//     ),
+//
+//
+
           FloatingActionButton(
             onPressed: () => _showNotification(context),
             child: const Icon(Icons.notifications),
             tooltip: 'New Report Notification',
-          ),
+          )
+
+
+          ,
           const SizedBox(height: 10),
           FloatingActionButton(
             onPressed: () => _addNewItem(context),
@@ -104,6 +144,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           ),
         ],
       ),
+
+
     );
   }
   Widget _buildFirestoreSection(String title, String collection, BuildContext context, int crossAxisCount) {
